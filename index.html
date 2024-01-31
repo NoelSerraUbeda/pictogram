@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Rejilla</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(10, 40px);
+            grid-template-rows: repeat(10, 40px);
+            gap: 2px;
+            grid-auto-flow: column;
+        }
+        .cell {
+            position: relative;
+            background-color: lightgray;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+        .correct {
+            background-color: green;
+        }
+        .bloq {
+            background-color: red;
+            pointer-events: none;
+        }
+        .cell .number {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
+            background-color: gray;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid" id="grid"></div>
+    <div id="attempts">Intentos restantes: 5</div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const grid = document.getElementById('grid');
+            const cells = [];
+            const correctCells = new Set();
+            let attempts = 5; // Contador de intentos
+            let gameEnded = false; // Indicador de si el juego ha terminado
+
+            // Crear celdas
+            for (let i = 0; i < 100; i++) {
+                const cell = document.createElement('div');
+                cell.classList.add('cell');
+                cell.dataset.index = i;
+                // Agregar clase "bloq" a las celdas específicas
+                if (i < 11 || i % 10 === 0) {
+                    cell.classList.add('bloq');
+                }
+                cell.addEventListener('click', function() {
+                    if (gameEnded) return; // No hacer nada si el juego ha terminado
+                    const index = parseInt(cell.dataset.index);
+                    // Verificar si la celda no tiene la clase "bloq"
+                    if (!cell.classList.contains('bloq') && !cell.classList.contains('correct')) {
+                        if (correctCells.has(index)) {
+                            cell.classList.add('correct');
+                            correctCells.delete(index);
+                            if (correctCells.size === 0) {
+                                updateNumbers();
+                                gameEnded = true;
+                                alert('¡Éxito!');
+                            } else {
+                                updateNumbers();
+                            }
+                        } else {
+                            attempts--;
+                            document.getElementById('attempts').textContent = 'Intentos restantes: ' + attempts;
+                            if (attempts === 0) {
+                                alert('¡Derrota!');
+                            } else {
+                                alert('¡Incorrecta! Intentos restantes: ' + attempts);
+                            }
+                        }
+                    }
+                });
+                grid.appendChild(cell);
+                cells.push(cell);
+            }
+
+            // Definir coordenadas de celdas correctas
+            const correctCoordinates = [
+                [1, 1], [2, 2], [3, 3], [4, 4], 
+                [5, 5], [6, 6], [7, 7], [8, 8], [9, 9]
+            ];
+
+            // Convertir coordenadas a índices y agregar a correctCells
+            correctCoordinates.forEach(coords => {
+                const [x, y] = coords;
+                const index = y * 10 + x;
+                correctCells.add(index);
+            });
+
+            // Actualizar números fuera de las celdas
+            function updateNumbers() {
+                const rowNumbers = Array.from({ length: 10 }, () => 0);
+                const colNumbers = Array.from({ length: 10 }, () => 0);
+
+                correctCells.forEach(index => {
+                    const x = index % 10;
+                    const y = Math.floor(index / 10);
+                    // Excluir celdas con la clase "bloq"
+                    if (!cells[index].classList.contains('bloq')) {
+                        rowNumbers[y]++;
+                        colNumbers[x]++;
+                    }
+                });
+
+                for (let i = 0; i < 10; i++) {
+                    const rowNumber = document.createElement('div');
+                    rowNumber.classList.add('number');
+                    rowNumber.textContent = rowNumbers[i];
+                    cells[i].innerHTML = '';
+                    cells[i].appendChild(rowNumber);
+
+                    const colNumber = document.createElement('div');
+                    colNumber.classList.add('number');
+                    colNumber.textContent = colNumbers[i];
+                    cells[i * 10].innerHTML = '';
+                    cells[i * 10].appendChild(colNumber);
+                }
+            }
+
+            // Inicializar los números
+            updateNumbers();
+        });
+    </script>
+</body>
+</html>
