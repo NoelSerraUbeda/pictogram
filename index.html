@@ -1,142 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juego de Rejilla</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(10, 40px);
-            grid-template-rows: repeat(10, 40px);
-            gap: 2px;
-            grid-auto-flow: column;
-        }
-        .cell {
-            position: relative;
-            background-color: lightgray;
-            border: 1px solid black;
-            cursor: pointer;
-        }
-        .correct {
-            background-color: green;
-        }
-        .bloq {
-            background-color: red;
-            pointer-events: none;
-        }
-        .cell .number {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 12px;
-            background-color: gray;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-    </style>
+    <!-- Codificación de carácteres -->
+    <meta charset="utf-8">
+    <!-- Responsive -->
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/1245/1245778.png">
+
+    <!-- Etiquetas con proposito de SEO, el título y la descripción aparecerán en los resultados de Google,
+    la etiqueta keywords se ha quedado obsoleta -->
+    <title>Panel de Administración</title>
+    <meta name="description" content="descripción de la web, se recomienda 90 caracteres">
+    <meta name="keywords" content="palabras clave, separadas, por comas">
+
+    <!-- Compartir closees sociales -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Título" />
+    <meta property="og:description" content="descripción de la web, se recomienda 90 caracteres" />
+    <meta property="og:image" content="" />
+
+    <!-- Fuentes de la web -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+    <!-- Documentos enlazados -->
+    <link rel="stylesheet" href="style/app.css">
+    <script type="module" src="js/app.js"></script>
+
 </head>
+
 <body>
     <div class="grid" id="grid"></div>
-    <div id="attempts">Intentos restantes: 5</div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const grid = document.getElementById('grid');
-            const cells = [];
-            const correctCells = new Set();
-            let attempts = 5; // Contador de intentos
-            let gameEnded = false; // Indicador de si el juego ha terminado
-
-            // Crear celdas
-            for (let i = 0; i < 100; i++) {
-                const cell = document.createElement('div');
-                cell.classList.add('cell');
-                cell.dataset.index = i;
-                // Agregar clase "bloq" a las celdas específicas
-                if (i < 11 || i % 10 === 0) {
-                    cell.classList.add('bloq');
-                }
-                cell.addEventListener('click', function() {
-                    if (gameEnded) return; // No hacer nada si el juego ha terminado
-                    const index = parseInt(cell.dataset.index);
-                    // Verificar si la celda no tiene la clase "bloq"
-                    if (!cell.classList.contains('bloq') && !cell.classList.contains('correct')) {
-                        if (correctCells.has(index)) {
-                            cell.classList.add('correct');
-                            correctCells.delete(index);
-                            if (correctCells.size === 0) {
-                                updateNumbers();
-                                gameEnded = true;
-                                alert('¡Éxito!');
-                            } else {
-                                updateNumbers();
-                            }
-                        } else {
-                            attempts--;
-                            document.getElementById('attempts').textContent = 'Intentos restantes: ' + attempts;
-                            if (attempts === 0) {
-                                alert('¡Derrota!');
-                            } else {
-                                alert('¡Incorrecta! Intentos restantes: ' + attempts);
-                            }
-                        }
-                    }
-                });
-                grid.appendChild(cell);
-                cells.push(cell);
-            }
-
-            // Definir coordenadas de celdas correctas
-            const correctCoordinates = [
-                [1, 1], [2, 2], [3, 3], [4, 4], 
-                [5, 5], [6, 6], [7, 7], [8, 8], [9, 9]
-            ];
-
-            // Convertir coordenadas a índices y agregar a correctCells
-            correctCoordinates.forEach(coords => {
-                const [x, y] = coords;
-                const index = y * 10 + x;
-                correctCells.add(index);
-            });
-
-            // Actualizar números fuera de las celdas
-            function updateNumbers() {
-                const rowNumbers = Array.from({ length: 10 }, () => 0);
-                const colNumbers = Array.from({ length: 10 }, () => 0);
-
-                correctCells.forEach(index => {
-                    const x = index % 10;
-                    const y = Math.floor(index / 10);
-                    // Excluir celdas con la clase "bloq"
-                    if (!cells[index].classList.contains('bloq')) {
-                        rowNumbers[y]++;
-                        colNumbers[x]++;
-                    }
-                });
-
-                for (let i = 0; i < 10; i++) {
-                    const rowNumber = document.createElement('div');
-                    rowNumber.classList.add('number');
-                    rowNumber.textContent = rowNumbers[i];
-                    cells[i].innerHTML = '';
-                    cells[i].appendChild(rowNumber);
-
-                    const colNumber = document.createElement('div');
-                    colNumber.classList.add('number');
-                    colNumber.textContent = colNumbers[i];
-                    cells[i * 10].innerHTML = '';
-                    cells[i * 10].appendChild(colNumber);
-                }
-            }
-
-            // Inicializar los números
-            updateNumbers();
-        });
-    </script>
+    <div class="hearts">
+        <div id="attempts">5</div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <title>cards-heart</title>
+            <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
+        </svg>
+    </div>
 </body>
+
 </html>
