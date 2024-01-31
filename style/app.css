@@ -5,8 +5,11 @@ body {
     align-items: center;
     flex-direction: column;
     gap: 2rem;
-    height: 100%;
     margin-top: 10rem;
+    background: -webkit-linear-gradient(top, #007bff, #a6c0fe, #ffd166); 
+    margin: 0;
+    height: 100vh; 
+    width: 100%; 
 }
 .grid {
     display: grid;
