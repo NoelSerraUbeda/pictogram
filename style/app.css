@@ -1,73 +1,95 @@
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 2rem;
-    margin-top: 10rem;
-    background: -webkit-linear-gradient(top, #007bff, #a6c0fe, #ffd166); 
-    margin: 0;
-    height: 100vh; 
-    width: 100%; 
+  background: 
+      url(../image/back.png) center center/cover no-repeat,
+      -webkit-linear-gradient(top, #007bff, #a6c0fe, #ffd166);
+  font-family: Arial, sans-serif;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10rem;
+  height: 100vh; 
+  display: flex;
+  width: 100%; 
+  gap: 2rem;
+  margin: 0;
 }
+
+
 .grid {
-    display: grid;
-    grid-template-columns: repeat(10, 40px);
-    grid-template-rows: repeat(10, 40px);
-    gap: 2px;
-    grid-auto-flow: column;
-    border: solid 10px black;
-    padding: 0.5rem;
-    background-color: lightgray;
+  grid-template-columns: repeat(11, 50px);
+  grid-template-rows: repeat(11, 50px);
+  background-color: lightgray;
+  border: solid 10px black;
+  grid-auto-flow: column;
+  padding: 0.5rem;
+  display: grid;
+  gap: 2px;
 }
+
 .cell {
-    position: relative;
-    background-color: lightgray;
-    border: 1px solid black;
-    cursor: pointer;
+  background-color: lightgray;
+  border: 1px solid black;
+  position: relative;
+  cursor: pointer;
+  border-radius: 10px;
 }
+
 .correct {
-    background-color: green;
+  background-color: green;
 }
+
 .bloq {
-    pointer-events: none;
+  pointer-events: none;
 }
+
 .cell .number {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 26px;
-    background-color: gray;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  border-radius: 10px;
+  transform: translate(-50%, -50%);
+  background-color: gray;
+  justify-content: center;
+  pointer-events: none;
+  align-items: center;
+  position: absolute;
+  font-size: 26px;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  left: 50%;
+  top: 50%;
 }
 
 #attempts {
-    color: white;
-    z-index: 999;
-    font-weight: bolder;
-    font-size: 60px;
+  font-weight: bolder;
+  font-size: 60px;
+  color: white;
+  z-index: 3;
 }
 
 .hearts {
-    position: relative;
-    width: 10rem;
-    height: 10rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  display: flex;
+  height: 10rem;
+  width: 10rem;
 }
 
 .hearts svg {
-    fill: red;
-    width: 10rem;
-    position: absolute;
-    top: 0;
-    left: 0;
+  position: absolute;
+  width: 10rem;
+  fill: red;
+  left: 0;
+  top: 0;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+.shake {
+  animation: shake 0.4s ease-in-out;
 }
