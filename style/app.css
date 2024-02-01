@@ -12,6 +12,7 @@ body {
   width: 100%; 
   gap: 2rem;
   margin: 0;
+  overflow:hidden;
 }
 
 

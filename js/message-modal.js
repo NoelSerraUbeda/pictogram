@@ -53,6 +53,7 @@ class Message extends HTMLElement {
           width: 40%;
           z-index:4;
         }
+
       </style>
 
       <div class="modal" id="modal">
