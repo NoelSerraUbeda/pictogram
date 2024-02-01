@@ -56,7 +56,7 @@ class Footer extends HTMLElement {
             background-color:lightgrey;
             position:absolute;
             bottom:3rem;
-            left:1rem;
+            right:1rem;
             width:20rem;
             border:grey solid 3px;
             border-bottom: none;
@@ -104,6 +104,7 @@ class Footer extends HTMLElement {
             }
           .icons {
               display:flex;
+              justify-content:end;
               padding:0.5rem;
               gap:0.5rem;
             }

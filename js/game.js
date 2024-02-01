@@ -2,11 +2,14 @@ document.addEventListener('DOMContentLoaded', function () {
   const grid = document.getElementById('grid');
   const cells = [];
   const correctCells = new Set();
-  let attempts = 100; // Contador de intentos
+  let attempts = 10; // Contador de intentos
   let gameEnded = false; // Indicador de si el juego ha terminado
 
   // Obtener el div con clase "hearts"
   const heartsDiv = document.querySelector('.hearts');
+
+  // Obtener el elemento de progreso
+  const progress = document.getElementById('progress');
 
   // Definir coordenadas y nombres de grupos de celdas correctas
   const groups = {
@@ -115,6 +118,14 @@ document.addEventListener('DOMContentLoaded', function () {
       cells[i].innerHTML = '';
       cells[i].appendChild(colNumber);
     }
+
+    // Calcular porcentaje de casillas correctas encontradas
+    const totalCorrectCells = selectedGroup.length;
+    const foundCorrectCells = totalCorrectCells - correctCells.size;
+    const percentage = (foundCorrectCells / totalCorrectCells) * 100;
+
+    // Actualizar el valor del elemento de progreso
+    progress.value = percentage;
   }
 
   // Inicializar los números
