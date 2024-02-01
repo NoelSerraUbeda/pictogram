@@ -56,12 +56,14 @@ class Footer extends HTMLElement {
             background-color:lightgrey;
             position:absolute;
             bottom:3rem;
-            left:0;
+            left:1rem;
             width:20rem;
             border:grey solid 3px;
+            border-bottom: none;
             transform: translate(0,42rem);
             transition: transform 0.3s ease-in-out;
             height:40rem;
+            border-radius: 20px 20px 0 0; 
           }
 
           .color-div {
