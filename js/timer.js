@@ -22,7 +22,7 @@ class Timer extends HTMLElement {
                     font-size: 24px;
                     font-family: Arial, sans-serif;
                     background-color:grey;
-                    color:red;
+                    color:white;
                     padding:2rem;
                     display:flex;
                     justify-content:center;
