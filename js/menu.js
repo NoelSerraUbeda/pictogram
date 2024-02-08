@@ -11,13 +11,12 @@ class Menu extends HTMLElement {
   render() {
     this.shadow.innerHTML = /*html*/`
       <style>
+
         .menu {
-          width:180vh;
-          height:90vh;
-          display: flex;
+          display:flex;
           flex-direction:column;
-          justify-content: start;
-          align-items: center;
+          gap:5rem;
+          margin-left:-1px
         }
 
         .container-title {
@@ -25,7 +24,7 @@ class Menu extends HTMLElement {
         }
 
         .container-play {
-          padding:5rem;
+          padding:1rem;
         }
 
         button {

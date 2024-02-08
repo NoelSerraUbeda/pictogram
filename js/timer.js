@@ -9,6 +9,10 @@ class Timer extends HTMLElement {
     connectedCallback() {
       this.render();
       this.startTimer();
+
+      document.addEventListener('success', event => {
+        this.stopTimer();
+      });
     }
 
     disconnectedCallback() {
