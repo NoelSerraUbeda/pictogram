@@ -5,3 +5,4 @@ import './message-modal.js';
 import './timer.js';
 import './menu.js';
 import './return.js';
+import './configuration.js';

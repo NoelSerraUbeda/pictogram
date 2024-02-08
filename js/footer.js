@@ -154,7 +154,7 @@ class Footer extends HTMLElement {
         <div class="color-div" data-color="yellow"></div>
         <div class="color-div" data-color="orange"></div>
       </div>
-    `;
+      `;
   }
 }
 
