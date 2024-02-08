@@ -2,16 +2,13 @@ document.addEventListener('DOMContentLoaded', function () {
   const grid = document.getElementById('grid');
   const cells = [];
   const correctCells = new Set();
-  let attempts = 10; // Contador de intentos
-  let gameEnded = false; // Indicador de si el juego ha terminado
+  let attempts = 10;
+  let gameEnded = false; 
 
-  // Obtener el div con clase "hearts"
   const heartsDiv = document.querySelector('.hearts');
-
-  // Obtener el elemento de progreso
   const progress = document.getElementById('progress');
 
-  // Definir coordenadas y nombres de grupos de celdas correctas
+  // Formas
   const groups = {
     'Casa': [[9, 8], [8, 8], [7, 8], [6, 8], [5, 8], [4, 8], [9, 2], [8, 2], [7, 2], [6, 2], [5, 2], [4, 2], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5], [3, 6], [3, 7], [3, 8], [3, 9], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [1, 7], [9, 6], [8, 6], [10, 6],[10, 8],[10, 2]],
     'Gato': [[4, 3], [5, 2], [5, 3], [6, 3], [6, 2], [6, 4], [7, 4], [8, 4], [9, 4], [10, 4], [6, 5], [7, 5], [6, 6], [7, 6], [6, 7], [7, 7], [8, 7], [9, 7], [10, 7], [6, 8], [5, 8], [4, 8], [4, 9], [4, 10], [5, 10], [6, 10], [7, 10], [8, 10]],
@@ -20,25 +17,21 @@ document.addEventListener('DOMContentLoaded', function () {
     // 'free': [[1, 1]],
   };
 
-  // Seleccionar un grupo aleatorio
   const groupNames = Object.keys(groups);
   const randomGroupName = groupNames[Math.floor(Math.random() * groupNames.length)];
   const selectedGroup = groups[randomGroupName];
 
-  // Crear celdas
-  for (let i = 0; i < 121; i++) { // Cambiar de 100 a 121
+  for (let i = 0; i < 121; i++) {
     const cell = document.createElement('div');
     cell.classList.add('cell');
     cell.dataset.index = i;
-    // Agregar clase "bloq" a las celdas específicas
-    if (i < 11 || i % 11 === 0) { // Cambiar de 10 a 11
+    if (i < 11 || i % 11 === 0) {
       cell.classList.add('bloq');
     }
     cell.addEventListener('click', function () {
-      if (gameEnded) return; // No hacer nada si el juego ha terminado
+      if (gameEnded) return; 
       const index = parseInt(cell.dataset.index);
-      
-      // Verificar si la celda no tiene la clase "bloq"
+
       if (!cell.classList.contains('bloq') && !cell.classList.contains('correct')) {
         if (correctCells.has(index)) {
           cell.classList.add('correct');
@@ -83,29 +76,26 @@ document.addEventListener('DOMContentLoaded', function () {
     cells.push(cell);
   }
 
-  // Convertir coordenadas a índices y agregar a correctCells
   selectedGroup.forEach(coords => {
     const [x, y] = coords;
-    const index = y * 11 + x; // Cambiar de 10 a 11
+    const index = y * 11 + x;
     correctCells.add(index);
   });
 
-  // Actualizar números fuera de las celdas
   function updateNumbers() {
-    const rowNumbers = Array.from({ length: 11 }, () => 0); // Cambiar de 10 a 11
-    const colNumbers = Array.from({ length: 11 }, () => 0); // Cambiar de 10 a 11
+    const rowNumbers = Array.from({ length: 11 }, () => 0); 
+    const colNumbers = Array.from({ length: 11 }, () => 0);
 
     correctCells.forEach(index => {
-      const x = index % 11; // Cambiar de 10 a 11
-      const y = Math.floor(index / 11); // Cambiar de 10 a 11
-      // Excluir celdas con la clase "bloq"
+      const x = index % 11;
+      const y = Math.floor(index / 11);
       if (!cells[index].classList.contains('bloq')) {
         rowNumbers[y]++;
         colNumbers[x]++;
       }
     });
 
-    for (let i = 0; i < 11; i++) { // Cambiar de 10 a 11
+    for (let i = 0; i < 11; i++) {
       const rowNumber = document.createElement('div');
       rowNumber.classList.add('number');
       rowNumber.textContent = rowNumbers[i];
@@ -119,15 +109,10 @@ document.addEventListener('DOMContentLoaded', function () {
       cells[i].appendChild(colNumber);
     }
 
-    // Calcular porcentaje de casillas correctas encontradas
     const totalCorrectCells = selectedGroup.length;
     const foundCorrectCells = totalCorrectCells - correctCells.size;
     const percentage = (foundCorrectCells / totalCorrectCells) * 100;
-
-    // Actualizar el valor del elemento de progreso
     progress.value = percentage;
   }
-
-  // Inicializar los números
   updateNumbers();
 });

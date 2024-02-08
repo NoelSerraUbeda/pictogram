@@ -13,31 +13,32 @@ class Reload extends HTMLElement {
     this.shadow.innerHTML = /*html*/`
       <style>
         button {
-            padding: 1rem 2rem;
-            border:none;
-            background:none;
-            z-index:999;
-            background-color:grey;
-            cursor:pointer;
-            border-radius:1rem;
-            color:white;
-            font-size:20px;
+          padding: 1rem 2rem;
+          border:none;
+          background:none;
+          z-index:999;
+          background-color:grey;
+          cursor:pointer;
+          border-radius:1rem;
+          color:white;
+          font-size:20px;
         }
 
         button svg{
-            fill:white;
-            cursor:pointer;
-            transition: transform 0.3s;
+          fill:white;
+          cursor:pointer;
+          transition: transform 0.3s;
         }
 
         button svg:hover{
-            transform:scale(1.1)
+          transform:scale(1.1)
         }
       </style>
     
       <button id="returnButton">
         <h2>New Game >>></h2>
-      </button>`;
+      </button>
+    `;
   }
 
   attachEventListeners() {

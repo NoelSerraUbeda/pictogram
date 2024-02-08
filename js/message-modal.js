@@ -60,7 +60,8 @@ class Message extends HTMLElement {
         <div class="modal-content">
           <p></p>
         </div>
-      </div>`;
+      </div>
+    `;
 
     const closeModal = () => {
       this.shadow.querySelector('.modal').style.display = 'none';

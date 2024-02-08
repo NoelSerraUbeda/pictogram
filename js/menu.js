@@ -29,12 +29,13 @@ class Menu extends HTMLElement {
         }
 
         button {
-          padding: 1.5rem 7rem;
+          padding: 1.5rem 10rem;
           font-size:64px;
           border-radius:1.5rem;
           border:none;
           cursor:pointer;
           transition: all 0.3s ease-in;
+          font-family: "Poppins", sans-serif;
         }
 
         .play-button button:hover { 
@@ -46,7 +47,6 @@ class Menu extends HTMLElement {
         img {
           width:40rem
         }
-
       </style>
 
       <div class="menu">
@@ -61,7 +61,7 @@ class Menu extends HTMLElement {
           </div>
         </div>
       </div>
-      `;
+    `;
   }
 }
 
