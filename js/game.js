@@ -85,9 +85,9 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   function updateNumbers() {
-    const rowNumbers = Array.from({ length: 11 }, () => 0); 
+    const rowNumbers = Array.from({ length: 11 }, () => 0);
     const colNumbers = Array.from({ length: 11 }, () => 0);
-
+  
     correctCells.forEach(index => {
       const x = index % 11;
       const y = Math.floor(index / 11);
@@ -96,26 +96,31 @@ document.addEventListener('DOMContentLoaded', function () {
         colNumbers[x]++;
       }
     });
-
+  
     for (let i = 0; i < 11; i++) {
-      const rowNumber = document.createElement('div');
-      rowNumber.classList.add('number');
-      rowNumber.textContent = rowNumbers[i];
-      cells[i * 11].innerHTML = '';
-      cells[i * 11].appendChild(rowNumber);
-
-      const colNumber = document.createElement('div');
-      colNumber.classList.add('number');
-      colNumber.textContent = colNumbers[i];
-      cells[i].innerHTML = '';
-      cells[i].appendChild(colNumber);
+      if (!cells[i * 11].querySelector('.number')) {
+        const rowNumber = document.createElement('div');
+        rowNumber.classList.add('number');
+        rowNumber.textContent = rowNumbers[i];
+        cells[i * 11].innerHTML = '';
+        cells[i * 11].appendChild(rowNumber);
+      }
+  
+      if (!cells[i].querySelector('.number')) {
+        const colNumber = document.createElement('div');
+        colNumber.classList.add('number');
+        colNumber.textContent = colNumbers[i];
+        cells[i].innerHTML = '';
+        cells[i].appendChild(colNumber);
+      }
     }
-
+  
     const totalCorrectCells = selectedGroup.length;
     const foundCorrectCells = totalCorrectCells - correctCells.size;
     const percentage = (foundCorrectCells / totalCorrectCells) * 100;
     progress.value = percentage;
   }
+
   updateNumbers();
 
   function recargarPaginaDespuesDeTiempo() {
