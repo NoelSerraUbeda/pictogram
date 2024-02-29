@@ -46,12 +46,16 @@ class Message extends HTMLElement {
           border: 1px solid #888;
           border-radius:1rem;
           align-items:center;
-          margin: 5% auto;
+          margin: 2% auto;
           font-size:40px;
-          padding: 20px;
+          padding: 5px;
           display:flex;
-          width: 40%;
+          width: 50%;
           z-index:4;
+        }
+
+        p {
+          margin: 0.5rem;
         }
 
       </style>

@@ -66,8 +66,8 @@ body {
   align-items: center;
   gap: 1rem;
   background-color: lightgrey;
-  border-radius: 1rem;
-  border: 10px solid black;
+  border-radius: 2rem;
+  border: 20px solid steelblue;
 }
 
 #progress {
@@ -80,8 +80,8 @@ body {
   grid-template-columns: repeat(11, 60px);
   grid-template-rows: repeat(11, 60px);
   background-color: lightgray;
-  border: solid 10px black;
-  border-radius: 1rem;
+  border: 20px solid steelblue;
+  border-radius: 2rem;
   grid-auto-flow: column;
   padding: 0.5rem;
   display: grid;

@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     'Gato': [[4, 3], [5, 2], [5, 3], [6, 3], [6, 2], [6, 4], [7, 4], [8, 4], [9, 4], [10, 4], [6, 5], [7, 5], [6, 6], [7, 6], [6, 7], [7, 7], [8, 7], [9, 7], [10, 7], [6, 8], [5, 8], [4, 8], [4, 9], [4, 10], [5, 10], [6, 10], [7, 10], [8, 10]],
     'Cereza':[[1, 5], [1, 6], [1, 7], [1, 8], [1, 9],[1, 10], [2, 8], [3, 7], [3, 8], [4, 5], [4, 6],[4, 8],[5, 2], [5, 3], [5, 4], [5, 8],[6, 1],[6, 3], [6, 4], [6, 5],[6, 7], [6, 8],[7, 1], [7, 2], [7, 3], [7, 4], [7, 5], [7, 6],[7, 8], [7, 9],[7, 10],[8, 1], [8, 2], [8, 3], [8, 4], [8, 5], [8, 6], [8, 7], [8, 8], [8, 9],[8, 10], [9, 2], [9, 3], [9, 4],[9, 6], [9, 7], [9, 8], [9, 9],[9, 10],[10, 7], [10, 8], [10, 9]],
     'Nota Musical':[[1, 5], [1, 6], [1, 7], [1, 8], [2, 5], [2, 8], [3, 5], [3, 8], [4, 5], [4, 8], [5, 5], [5, 8], [5, 10], [6, 5] ,[6, 8],[6, 9],[6, 10],[7, 5],[8, 3], [8, 4], [8, 5],[9, 3], [9, 4], [9, 5], [10, 3], [10, 4], [10, 5]],
+    'Pato': [[1, 4],[1, 5],[1, 6],[1, 7],[2, 2],[2, 3],[2, 7],[2, 8],[3, 2],[3, 5],[3, 8],[4, 2],[4, 3],[4, 5],[4, 8],[5, 1],[5, 2],[5, 3],[5, 4],[5, 8],[5, 9],[6, 3],[6, 7],[6, 8],[6, 10],[7, 2],[7, 6],[7, 10],[8, 1],[8, 2],[8, 10],[9, 2],[9, 6],[9, 10],[10, 3],[10, 4],[10, 5],[10, 6],[10, 7],[10, 8],[10, 9],],
     'free': [[1, 1]],
   };
 
@@ -46,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 groupName: randomGroupName
               }
             });
-            recargarPaginaDespuesDeTiempo();
+            recargar();
             document.dispatchEvent(successEvent);
           } else {
             updateNumbers();
@@ -64,10 +65,10 @@ document.addEventListener('DOMContentLoaded', function () {
             gameEnded = true;
             const defeatEvent = new CustomEvent('defeat', {
               detail: {
-                message: '¡Derrota!'
+                message: '¡Derrota! Es: ' + randomGroupName + ".",
               }
             });
-            recargarPaginaDespuesDeTiempo();
+            recargar();
             document.dispatchEvent(defeatEvent);
           }
         }
@@ -123,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   updateNumbers();
 
-  function recargarPaginaDespuesDeTiempo() {
+  function recargar() {
     setTimeout(function() {
         location.reload();
     }, 5000);
